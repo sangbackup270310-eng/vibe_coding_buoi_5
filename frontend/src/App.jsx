@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import Register from './pages/Register.jsx';
 
 function Header() {
   return (
@@ -356,12 +357,8 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<LandingPage />} />
-        {/* Placeholder routes for future auth pages */}
+        <Route path="/register" element={<Register />} />
         <Route path="/login" element={<div>Login page (coming soon)</div>} />
-        <Route
-          path="/register"
-          element={<div>Register page (coming soon)</div>}
-        />
       </Routes>
     </Router>
   );
