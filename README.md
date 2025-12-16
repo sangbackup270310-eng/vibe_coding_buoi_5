@@ -15,8 +15,15 @@ Dự án “Try-on” là ứng dụng thử đồ (virtual try-on) theo hướn
 ## Cấu trúc repo
 - `.cursor/`: rules/commands cho Cursor
 - `sprints/`: user stories + sprint backlog
+- `backend/`: Node.js/Express backend API
+- `frontend/`: React/Vite frontend application
 - `PB.md`: product backlog
 - `README.md`: tài liệu dự án
+- `SETUP.md`: hướng dẫn setup và chạy project
+
+## Quick Start
+
+Xem file `SETUP.md` để biết cách setup và chạy project.
 
 ## Hướng dẫn vibe code
 - Bám theo các tasks liệt kê trong sprint backlog, hãy ra lệnh cho AI thực hiện từng task một. Nhớ @ các files liên quan tới tasks khi ra lệnh.
