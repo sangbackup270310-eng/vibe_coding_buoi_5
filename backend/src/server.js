@@ -2,6 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import authRoutes from './routes/auth.js';
+import userRoutes from './routes/user.js';
 import { testSupabaseConnection } from './config/supabase.js';
 
 dotenv.config();
@@ -21,6 +22,9 @@ app.get('/api/health', (req, res) => {
 
 // Auth routes
 app.use('/api/auth', authRoutes);
+
+// User routes (protected)
+app.use('/api/user', userRoutes);
 
 // Test Supabase connection on startup
 testSupabaseConnection();

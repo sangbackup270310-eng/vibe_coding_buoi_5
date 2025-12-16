@@ -1,5 +1,8 @@
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import Register from './pages/Register.jsx';
+import Login from './pages/Login.jsx';
+import Profile from './pages/Profile.jsx';
+import ProtectedRoute from './components/ProtectedRoute.jsx';
 
 function Header() {
   return (
@@ -358,7 +361,15 @@ function App() {
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/login" element={<div>Login page (coming soon)</div>} />
+        <Route path="/login" element={<Login />} />
+        <Route
+          path="/profile"
+          element={
+            <ProtectedRoute>
+              <Profile />
+            </ProtectedRoute>
+          }
+        />
       </Routes>
     </Router>
   );
