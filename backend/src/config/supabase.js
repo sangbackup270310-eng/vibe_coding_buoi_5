@@ -6,22 +6,35 @@ dotenv.config();
 const supabaseUrl = process.env.SUPABASE_URL;
 const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
 
-if (!supabaseUrl || !supabaseServiceKey) {
+// Only create Supabase client if credentials are provided
+let supabase = null;
+
+if (supabaseUrl && supabaseServiceKey) {
+  supabase = createClient(supabaseUrl, supabaseServiceKey, {
+    auth: {
+      autoRefreshToken: false,
+      persistSession: false,
+    },
+  });
+  console.log('✅ Supabase client initialized');
+} else {
   console.warn(
     '⚠️  Supabase credentials not configured. Please set SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY in .env'
   );
+  console.warn(
+    '⚠️  Server will start but database operations will fail until configured.'
+  );
 }
 
-// Create Supabase client with service role key (for admin operations)
-export const supabase = createClient(supabaseUrl, supabaseServiceKey, {
-  auth: {
-    autoRefreshToken: false,
-    persistSession: false,
-  },
-});
+export { supabase };
 
 // Test connection (optional)
 export const testSupabaseConnection = async () => {
+  if (!supabase) {
+    console.warn('⚠️  Skipping Supabase connection test (not configured)');
+    return;
+  }
+
   try {
     const { data, error } = await supabase.from('profiles').select('count').limit(1);
     if (error && error.code !== 'PGRST116') {
